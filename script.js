@@ -6,10 +6,12 @@ let currentRoundNumber = 1;
 
 const generateTarget = () => Math.floor(Math.random() * 10);
 
+const getAbsoluteDistance = (num1, num2) => Math.abs(num1 - num2);
+
 const compareGuesses = (userGuess, computerGuess, targetNumber) => {
-  const userDistance = Math.abs(userGuess - targetNumber);
-  const computerDistance = Math.abs(computerGuess - targetNumber);
-  if (userDistance <= computerDistance) {
+  if (userGuess < 0 || userGuess > 9) {
+    alert('Please input a number between 0 and 9');
+  } else if (getAbsoluteDistance(userGuess, targetNumber) <= getAbsoluteDistance(computerGuess, targetNumber)){
     return true;
   } else {
     return false;
@@ -18,10 +20,10 @@ const compareGuesses = (userGuess, computerGuess, targetNumber) => {
 
 const updateScore = winner => {
   if (winner === 'human') {
-    return humanScore += 1;
+    return humanScore++;
   } else if (winner === 'computer') {
-    return computerScore +=1;
+    return computerScore++;
   }
 };
 
-const advanceRound = () => currentRoundNumber += 1;
+const advanceRound = () => currentRoundNumber++;
